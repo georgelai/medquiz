@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/home.dart';
+import 'screens/login.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.cyan,
         primaryColor: Colors.cyan[700],
       ),
-      home: MyHomePage(title: 'MedQuiz'),
+      home: LoginScreen(),//MyHomePage(title: 'MedQuiz'),
     );
   }
 }

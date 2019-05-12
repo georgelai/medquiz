@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "22463932542",
+    "firebase_url": "https://med-quiz-acb81.firebaseio.com",
+    "project_id": "med-quiz-acb81",
+    "storage_bucket": "med-quiz-acb81.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22463932542:android:aa95d42f4ace8c62",
+        "android_client_info": {
+          "package_name": "us.binarychaos.medquiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22463932542-e9lk7vs6mbgfi02416b47a6v65i0mied.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "us.binarychaos.medquiz",
+            "certificate_hash": "ba498384afe943ae4a117cdb96b3035c826377a7"
+          }
+        },
+        {
+          "client_id": "22463932542-qetdursgo4n4ti5sft50n78pr2349c6r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtMjs9XdClMjm1WnbqQBjJBzP4sn2Z0V0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22463932542-qetdursgo4n4ti5sft50n78pr2349c6r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22463932542-m8dtruaaokupjs2ag4ct50jb9n5jhks6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "us.binarychaos.medquiz"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
