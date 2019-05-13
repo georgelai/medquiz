@@ -13,9 +13,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
 
         primarySwatch: Colors.cyan,
-        primaryColor: Colors.cyan[700],
+        primaryColor: Colors.cyan[800],
       ),
       home: LoginScreen(),//MyHomePage(title: 'MedQuiz'),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

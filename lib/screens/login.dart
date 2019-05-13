@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'home.dart';
 
 enum FormMode { LOGIN, SIGNUP }
 
@@ -63,51 +62,47 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          TextFormField(
-            // USERNAME
-            controller: _emailController,
-            decoration: InputDecoration(
-              hintText: 'E-mail address',
-              fillColor: Colors.grey[200],
-              filled: true,
-              border: OutlineInputBorder(),
+          Padding(
+            padding: const EdgeInsets.only(left: 32.0, right: 32.0),
+            child: TextFormField(
+              // USERNAME
+              decoration: InputDecoration(
+                labelText: 'E-mail',
+                prefixIcon: Icon(Icons.email),
+              ),
+              controller: _emailController,
+              maxLines: 1,
+              keyboardType: TextInputType.emailAddress,
+              validator: (value) =>
+              value.isEmpty ? 'Please enter a username' : null,
+              onSaved: (value) => _email = value,
             ),
-            maxLines: 1,
-            keyboardType: TextInputType.emailAddress,
-            validator: (value) =>
-            value.isEmpty ? 'Please enter a username' : null,
-            onSaved: (value) => _email = value,
-          ),
-          SizedBox(
-            height: 16.0,
-          ),
-          TextFormField(
-            controller: _passwordController,
-            obscureText: true,
-            maxLines: 1,
-            decoration: InputDecoration(
-              // PASSWORD
-              hintText: 'Password',
-              fillColor: Colors.grey[200],
-              filled: true,
-              border: OutlineInputBorder(),
-            ),
-            validator: (value) =>
-            value.isEmpty ? 'Please enter a password' : null,
-            onSaved: (value) => _password = value,
           ),
           Padding(
-            padding: EdgeInsets.only(top: 16.0),
+            padding: const EdgeInsets.only(left: 32.0, right: 32.0),
+            child: TextFormField(
+              controller: _passwordController,
+              obscureText: true,
+              maxLines: 1,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                prefixIcon: Icon(Icons.lock_outline),
+              ),
+              validator: (value) =>
+              value.isEmpty ? 'Please enter a password' : null,
+              onSaved: (value) => _password = value,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 16.0),
             child: _formMode == FormMode.SIGNUP
                 ? TextFormField(
               obscureText: true,
               maxLines: 1,
               decoration: InputDecoration(
                 // PASSWORD VERIFICATION
-                hintText: 'Verify Password',
-                fillColor: Colors.grey[200],
-                filled: true,
-                border: OutlineInputBorder(),
+                labelText: 'Verify Password',
+                prefixIcon: Icon(Icons.lock_outline),
               ),
               validator: (value) => value != _passwordController.text
                   ? 'Passwords do not match.'
@@ -117,36 +112,65 @@ class _LoginScreenState extends State<LoginScreen> {
                 : null,
           ),
           _showErrorMessage(),
-          SizedBox(
-            height: 16.0,
-          ),
-          RaisedButton(
-            // BUTTON
-            color: Colors.blue,
-            child: _formMode == FormMode.LOGIN
-                ? Text(
-              'Log In',
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            )
-                : Text(
-              'Sign Up',
-              style: TextStyle(
-                color: Colors.white,
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: FlatButton(
+                  child: Text(
+                    'Forgot password?',
+                    style: TextStyle(
+                      fontFamily: 'NunitoSansRegular',
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 13.0,
+                    ),
+                  ),
+                  onPressed: (){}
+//                => Navigator.push(context,
+//                    MaterialPageRoute(builder: (context) => ForgotPassword(auth: widget.auth,))),
               ),
             ),
-            onPressed: () async {
-//              if (_formKey.currentState.validate()) {
+          ),
+
+          Padding(
+            padding: const EdgeInsets.only(left: 32.0, right: 32.0),
+            child: RaisedButton(
+              // BUTTON
+              color: Theme.of(context).primaryColor,
+              child: _formMode == FormMode.LOGIN
+                  ? Text(
+                'LOGIN',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'NunitoSansBold'
+                ),
+              )
+                  : Text(
+                'SIGN UP',
+                style: TextStyle(
+                  color: Colors.white,
+                    fontFamily: 'NunitoSansBold',
+                ),
+              ),
+              onPressed: () async {
+              if (_formKey.currentState.validate()) {
+                // this is where the API call will go to sign in
+
 //                _formMode == FormMode.LOGIN
 //                    ? _signInWithEmailAndPassword()
 //                    : _register();
-//              }
-            },
+
+                  _formMode == FormMode.LOGIN
+                      ? Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MyHomePage()))
+                      : null;
+              }
+              },
+            ),
           ),
           Container(
             alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 0.0),
             child: Text(
               _success == null
                   ? ''
@@ -156,79 +180,38 @@ class _LoginScreenState extends State<LoginScreen> {
               style: TextStyle(color: Colors.red),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Forgot your login details?',
-                style: TextStyle(
-                  fontSize: 11.0,
-                ),
-              ),
-              SizedBox(
-                width: 8.0,
-              ),
-              FlatButton(
-                child: Text(
-                  'Get help signing in.',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 11.0,
-                  ),
-                ),
-                onPressed: (){}
-//                => Navigator.push(context,
-//                    MaterialPageRoute(builder: (context) => ForgotPassword(auth: widget.auth,))),
-              ),
-            ],
-          ),
-
-
-
-
-
-
-
-
 
 
           Container(
-            padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
+            margin: EdgeInsets.only(top: 0.0),
+            padding: EdgeInsets.only(top: 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Divider(
-                  color: Colors.grey[700],
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 8.0,
-                        bottom: 8.0,
+                    _formMode == FormMode.LOGIN
+                        ? Text(
+                      'Don\'t  have an account?',
+                      style: TextStyle(
+                        fontSize: 13.0,
                       ),
-                      child: _formMode == FormMode.LOGIN
-                          ? Text(
-                        'Don\'t  have an account?',
-                        style: TextStyle(
-                          fontSize: 10.0,
-                        ),
-                      )
-                          : Text(
-                        'Have an account?',
-                        style: TextStyle(
-                          fontSize: 10.0,
-                        ),
+                    )
+                        : Text(
+                      'Have an account?',
+                      style: TextStyle(
+                        fontSize: 10.0,
                       ),
                     ),
                     FlatButton(
                       child: _formMode == FormMode.LOGIN
                           ? Text(
-                        'Sign Up',
+                        'Sign Up here',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 10.0,
+                          fontSize: 13.0,
+                          fontFamily: 'NunitoSansRegular',
+                          color: Theme.of(context).primaryColor,
                         ),
                       )
                           : Text(
