@@ -161,9 +161,9 @@ class _LoginScreenState extends State<LoginScreen> {
 //                    : _register();
 
                   _formMode == FormMode.LOGIN
-                      ? Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MyHomePage()))
+                      ? Navigator.of(context).pushReplacementNamed('/home')
                       : null;
+
               }
               },
             ),

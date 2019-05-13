@@ -17,6 +17,9 @@ class MyApp extends StatelessWidget {
       ),
       home: LoginScreen(),//MyHomePage(title: 'MedQuiz'),
       debugShowCheckedModeBanner: false,
+      routes: <String, WidgetBuilder>{
+        '/home': (BuildContext context) => new MyHomePage(),
+      }
     );
   }
 }
